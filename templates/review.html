@@ -1,0 +1,187 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title%}{% endblock%}
+{% block body%} 
+    <!-- Page Header Start -->
+    
+    <!-- Page Header End -->
+
+
+    <!-- Shop Detail Start -->
+    <div class="container-fluid py-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-5 pb-5">     
+                <h3 style="font-weight: bold;">Customer reviews</h3><hr>
+                        <p style="font-weight:bold; color:black;"> Product rating {{rat_list.5}} out of 5</p>
+                        <p> {{review.count}} golbal ratings </p>
+                        
+                        <table class="table ">
+                            <tbody>
+                                <tr>
+                                    <th scope="col">1 star</th>
+
+                                    <th scope="col">
+                            <div class="progress col-lg">  
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{rat_list.0}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div></th>
+                              <th scope="col">{{rat_list.0}}%</th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                
+                                <th scope="col">2 star</th>
+                                <th scope="col">
+                              <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{rat_list.1}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div></th>
+                              <th scope="col">{{rat_list.1}}%</th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <th scope="col">3 star</th>
+                            <th scope="col">
+                              <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{rat_list.2}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div></th>
+                              <th scope="col">{{rat_list.2}}%</th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <th scope="col">4 star</th>
+                                
+                                <th scope="col">
+                              <div class="progress" >
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{rat_list.3}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                              </div></th>
+                              <th scope="col">{{rat_list.3}}%</th>
+                            </tr>
+                        </tbody>
+                        <tbody>
+                            <tr>
+                                <th scope="col">5 star</th>
+                                
+                                <th scope="col">
+                              <div class="progress">
+                                <div class="progress-bar bg-info" role="progressbar" style="width: {{rat_list.4}}%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><div>
+                              </div></th>
+                              <th scope="col">{{rat_list.4}}%</th>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                              <br>
+                              <a href="{% url "products:item_detail" product.id %}">Write a review</a>
+                              
+                            </div>
+            
+
+            <div class="col-lg-7 pb-5">
+                <h1 class="font-weight-semi-bold">{{product.product_name}}</h1>
+                <a href="{% url "products:item_detail" product.id %}">visit the {{product.brand}} store</a>
+                <div class="d-flex mb-3">
+                    <div class="text-primary mr-2">
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star"></small>
+                        <small class="fas fa-star-half-alt"></small>
+                        <small class="far fa-star"></small>
+                    </div>
+                    <small class="pt-1">(50 Reviews) (Rating)</small>
+                </div>
+                <hr>
+                
+                <h2 class="font-weight-semi-bold mb-4"><small style="color:red;"><del>M.R.P. 114</del></small> Rs. {{product.price}}  </h2>
+
+                 <h5> About this item </h5>
+                 <hr>
+                <p class="mb-4">{{product.desc}}</p>
+                {% if ram_list%}
+                <div class="d-flex mb-3">
+                    <p class="text-dark font-weight-medium mb-0 mr-3">RAM:</p>
+                    <form>
+{% for ram in ram_list%}
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" name="size">
+                            <label class="custom-control-label" >{{ram.ram}} GB</label>
+                        </div>
+{% endfor%}
+                    </form>
+                </div>
+                {% endif%}
+                {% if color%}
+
+                <div class="d-flex mb-4">
+                    <p class="text-dark font-weight-medium mb-0 mr-3">Colors:</p>
+                    <form>
+                        {% for color in color%}
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="color-1" name="color">
+                            <label class="custom-control-label" for="color-1">{{color.ram}}</label>
+                        </div>
+{% endfor%}
+                       
+                    </form>
+                </div>
+                {% endif%}
+                <div class="d-flex align-items-center mb-4 pt-2">
+                    <div class="input-group quantity mr-3" style="width: 130px;">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-minus" >
+                            <i class="fa fa-minus"></i>
+                            </button>
+                        </div>
+                        <input type="text" class="form-control bg-secondary text-center" value="1">
+                        <div class="input-group-btn">
+                            <button class="btn btn-primary btn-plus">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                </div>
+            </div>
+        </div>
+        <div class="row px-xl-5">
+            <div class="col">
+               
+                        <div class="row">
+                            <div class="col-md-10">
+                                <h4 class="mb-4"> reviews for "{{product.product_name}}"</h4>
+                        {% for i in review%}
+                               {% if i.name%}
+                                <h5><small>{{i.name}}</small></h5>  
+{% else %}
+<h5><small>E-dukan Customer </small></h5>
+{% endif%}
+                                        <div class="text-primary mb-2">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star-half-alt"></i>
+                                            <i class="far fa-star"></i>
+                                            <small ><i style="font-weight:bold; color:black;">{{i.comment}}</i></small>
+                                            </div>
+                                            
+                                            <h6><small> Reviewed on {{i.date}}</small></h6>
+                                            <p>{{i.review}}</p>
+                                            <h6><small>30 people found this helpful</small></h6>
+                                            <button type="button" class="btn btn-outline-dark btn-sm">Helpful</button>
+                                            <hr>
+
+                                  
+                                
+                            {% endfor%}
+                           
+                            </div>    
+                            
+                            
+            </div>
+        </div>
+    </div>
+    <!-- Shop Detail End -->
+
+
+{% endblock%}

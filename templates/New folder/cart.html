@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{%block title %}Details {% endblock%}
+
+{%block body %}
+
+<br>
+<div class="container">
+
+   <form method="post" action="">
+       {% csrf_token %}
+
+    <div class="row">
+        <div class="col-sm-2">
+            
+          </div>
+        <div class="col-sm-2">
+            <h5>Image</h5>
+        </div>
+        <div class="col-sm-4">
+            <h5>Product</h5>
+        </div>
+        <div class="col-sm-3">
+            <h5> Quantity</h5>
+        </div>
+        <div class="col-sm-1">
+            <h5> Totle</h5>
+          </div>
+      </div>
+    <hr>
+
+
+
+        <div class="row">
+            <div class="col-sm-2 p-4">
+                <a href="">Remove</a>
+              </div>
+          <div class="col-sm-2">
+            <img src="{%static 'img/1.jpg'%}" class="img-thumbnail" style="width:150px;height:200px;" alt="...">
+          </div>
+          <div class="col-sm-4">
+            <a href=""><h3>new mac book 2015</h3></a>
+            <h5 style=" color:Green;">Rs.500</h5>
+            <h6 style=" color:red;">Rs.<del>500</del></h6>
+          </div>
+
+          <div class="col-sm-3 p-4">
+            <input type="number" >
+          </div>
+          <div class="col-sm-1 p-4">
+            <h5>500</h5>
+          </div>
+        </div>
+
+
+        
+        </div>
+        
+        <div class="col-sm-12 p-4" style="margin-left:1100px">
+            <button type="submit" class="btn btn-primary">Update Cart</button>
+            <button type="button"  class="btn btn-warning"><a href="">Checkout</a></button>
+          </div>
+        </form>
+</div>
+
+<br><br><br><br>
+
+{% endblock%}
