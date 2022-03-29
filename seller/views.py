@@ -4,7 +4,6 @@ from customer.models import *
 from seller.models import *
 from products.models import *
 
-# Create your views here.
 def seller(request):
     if  request.user.is_authenticated:
         if Seller.objects.filter(seller=request.user):
@@ -38,7 +37,6 @@ def profile(request):
     return render(request, "seller_dashboard.html")
 
 def delete_product(request,item_id):
-
     item=Product.objects.filter(id=item_id)
     item.delete()
     return redirect("/seller/dashboard")
