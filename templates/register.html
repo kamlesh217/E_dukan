@@ -17,6 +17,13 @@
             <div class="col-lg-8">
                 <div class="mb-4">
                     <h4 class="font-weight-semi-bold mb-4">Creat New account</h4>
+                    {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                     <form method="post" action="">
                     {% csrf_token %}
                         <div class="row">  
@@ -39,17 +46,31 @@
                         <div class="col-md-6 form-group">
                             <label>Address</label>
                             <input class="form-control" type="text" name="address">
-                        </div><br>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>City</label>
+                            <input class="form-control" type="text" name="city">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>State</label>
+                            <input class="form-control" type="text" name="state">
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Zip</label>
+                            <input class="form-control" type="number" name="zip">
+                        </div>
                         <div class="col-md-6 form-group">
                             <label>Password</label>
-                            <input class="form-control" type="password" name="address">
+                            <input class="form-control" type="password" name="password">
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="button" class="btn btn-primary">Create account</button>
-                            <a href="/login"> Already have account</a>
+                            <button type="submit" class="btn btn-primary">Create account</button>
+                        </form>
+                            
+                            <a href="/customer/login"> Already have account</a>
                         </div>
                     </div>
-                </form>
+                
                 </div>
             </div>
         </div>

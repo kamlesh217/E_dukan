@@ -23,7 +23,9 @@ urlpatterns = [
     path("",include("core.urls")),
     path("customer/", include("customer.urls")),
     path("seller/", include("seller.urls")),
-    path("products/", include("products.urls"))
+    path("products/", include("products.urls")),
+    path("cart/", include("cart.urls")),
+
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)

@@ -1,15 +1,18 @@
 
-from stringprep import c22_specials
 from django.shortcuts import render
 from methods import Details_context
 from .models import *
+from django.core.paginator import Paginator
+from cart.models import *
 # Create your views here.
 
 def all_reviews(request, id):
     review_list=Reviews.objects.filter(product_id=id).reverse()
     context={
         "review":review_list,
-        "rat_list":rating_(id)
+        "rat_list":rating_(id),
+        'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
+        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
     }
     context["product"]=Product.objects.get(id=id)
     return render(request, "review.html", context )
@@ -42,7 +45,8 @@ def detail(request, item_id):
     context["list"]=Product.objects.filter(category=cat)
     context["ram_list"]=RAM.objects.filter(product_id=item_id)
     context["color"]=RAM.objects.filter(product_id=item_id)
-
+    context['cart_item']=len(Cart.objects.filter(customer_id=request.user.id))
+    context['wishlist_item']=len(Wishlist.objects.filter(customer_id=request.user.id))
 
     if request.method=="POST":
         massage=request.POST["massage"]
@@ -52,8 +56,6 @@ def detail(request, item_id):
         print(massage,rating,name,email)
         review=Reviews.objects.create(review=massage, rating=rating, name=name,email=email,product_id=item_id)
         review.save()
-        
-    
     return render(request, "detail.html", context)
 
 def category(request,itemCategory ):
@@ -62,12 +64,22 @@ def category(request,itemCategory ):
     for i in range(len(product_cat)):
         a=Product.objects.filter(category=product_cat[i])
         product_set= product_set | a
-    
-    return render(request, "shop.html",{"product":product_set})
+    context={
+        "product":product_set,
+        'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
+        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
+    }
+    return render(request, "shop.html",context)
 
 def shop(request):
+    product=Product.objects.all()
+    paginator=Paginator(product,1)
+    page=request.GET.get('page')
+    product=paginator.get_page(page)
     context={
-    "product":Product.objects.all(),
+    "product":product,
+    'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
+    'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
     }
     return render(request, "shop.html", context)
 

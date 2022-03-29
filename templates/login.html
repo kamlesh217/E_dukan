@@ -17,6 +17,13 @@
             <div class="col-lg-8">
                 <div class="mb-4">
                     <h4 class="font-weight-semi-bold mb-4">Log in</h4>
+                    {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
                     <form method="post" action="">
                     {% csrf_token %}
                         <div class="row">  
@@ -26,11 +33,11 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Password</label>
-                            <input class="form-control" type="password" name="address">
+                            <input class="form-control" type="password" name="password">
                         </div>
                         <div class="col-md-12 form-group">
-                            <button type="button" class="btn btn-primary">Login</button>
-                            <a href="/register"> New user</a>
+                            <button type="submit" class="btn btn-primary">Login</button>
+                            <a href="/customer/register"> New user</a>
                         </div>
                     </div>
                 </form>

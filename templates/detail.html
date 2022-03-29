@@ -47,18 +47,12 @@
                         <small class="fas fa-star"></small>
                         <small class="fas fa-star"></small>
                         <small class="fas fa-star-half-alt"></small>
-                        <small class="far fa-star"></small>
-                        
+                        <small class="far fa-star"></small>                    
                     </div>
-
-
-
                     <small class="pt-1">({{review_count}} Reviews)</small>
                 </div>
-                <hr>
-                
+                <hr>            
                 <h2 class="font-weight-semi-bold mb-4" style="font-family:arial;"> Rs. {{product.price}} <small style="font-family: arial ; font-size:20px; color:red;"><del>M.R.P. 114</del></small> </h2>
-
                  <h5> About this item </h5>
                  <hr>
                 <p class="mb-4">{{product.desc}}</p>
@@ -91,20 +85,8 @@
                 </div>
                 {% endif%}
                 <div class="d-flex align-items-center mb-4 pt-2">
-                    <div class="input-group quantity mr-3" style="width: 130px;">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-minus" >
-                            <i class="fa fa-minus"></i>
-                            </button>
-                        </div>
-                        <input type="text" class="form-control bg-secondary text-center" value="1">
-                        <div class="input-group-btn">
-                            <button class="btn btn-primary btn-plus">
-                                <i class="fa fa-plus"></i>
-                            </button>
-                        </div>
-                    </div>
-                    <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button>
+                  <a href={% url "cart:Add_to_cart" product.id %}>  <button class="btn btn-primary px-3"><i class="fa fa-shopping-cart mr-1"></i> Add To Cart</button></a>
+                   </a>
                 </div>
             </div>
         </div>

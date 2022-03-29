@@ -10,6 +10,8 @@ class Seller(models.Model):
     state=models.CharField( max_length=100)
     zip=models.IntegerField()
     company_name=models.CharField( max_length=100)
+    company_email=models.CharField( max_length=100)
+    company_phone=models.CharField( max_length=100)
 
 
     def __str__(self):
