@@ -47,7 +47,7 @@ def detail(request, item_id):
     context["color"]=RAM.objects.filter(product_id=item_id)
     context['cart_item']=len(Cart.objects.filter(customer_id=request.user.id))
     context['wishlist_item']=len(Wishlist.objects.filter(customer_id=request.user.id))
-
+    
     if request.method=="POST":
         massage=request.POST["massage"]
         rating=request.POST['RadioOptions']
@@ -75,7 +75,16 @@ def shop(request):
 
 
 def category(request,itemCategory ):
-    product_set=Product.objects.filter(category__title=itemCategory)
+    product_set=Product.objects.filter(category__id=itemCategory)
+    context={
+        "product":product_set,
+        'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
+        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
+    }
+    return render(request, "shop.html",context)
+
+def Group_category(request,category_sub):
+    product_set=Product.objects.filter(category__group__id=category_sub)
     context={
         "product":product_set,
         'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),

@@ -157,8 +157,10 @@
                         </div>
                     </div>
 
+
+                    <div class="container">
                     {% for item in product %}
-                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
+                   <!-- <div class="col-lg-4 col-md-6 col-sm-12 pb-1">
                         <div class="card product-item border-0 mb-4">
                             <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
                                 <a href="{% url "products:item_detail" item.id %}">
@@ -174,10 +176,30 @@
                                     </div>
                             </div>
                         </div>
-                    </div>
+                    </div>-->
+                    <div class="card mb-4" style="max-width:850px;height:auto;">
+                        <div class="row g-0">
+                          <div class="col-md-5">
+                            <a href="{% url "products:item_detail" item.id %}">
+                            <img style="max-width: 350px;" src="/media/{{item.image}}" width="600px" class="img-fluid rounded-start" alt="...">
+                            </a>
+                        </div>
+                          <div class="col-md-6">
+                            <div class="card-body">
+                                <a href="{% url "products:item_detail" item.id %}">
+                                    <h5 class="card-text" style='font-family: "Georgia", Times, serif; font-weight: bold;'>
+                                        {{item.product_name}}</h5></a>
+                                        <hr>
+                                        <h4>₹.{{item.price}} <small style='color:red;'>  <del>₹.{{item.actual_price}}<del></small></h4>
+                                           
+                              <p class="card-text"><small class="text-muted">seller: {{item.seller.company_name}}</small></p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
 
 {% endfor%}
-                    
+                </div>
 
                 </div>
             </div>

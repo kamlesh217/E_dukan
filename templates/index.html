@@ -90,7 +90,7 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">   </p>
-                    <a href={% url "products:item_category" "Mobiles & Tablets"  %} class="cat-img position-relative overflow-hidden mb-3">
+                    <a href={% url "products:Group_category" 4  %} class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" width="300" src="{% static 'img/mobile_3.jpg'%}" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Mobiles & Tablets</h5>
@@ -99,7 +99,7 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">   </p>
-                    <a href={% url "products:item_category" "Computers & laptops"  %} class="cat-img position-relative overflow-hidden mb-3">
+                    <a href={% url "products:Group_category" 5  %} class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" width="300" src="{% static 'img/laptop.jpg'%}" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Computers & laptops</h5>
@@ -108,7 +108,7 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">   </p>
-                    <a href={% url "products:item_category" "Cameras"  %} class="cat-img position-relative overflow-hidden mb-3">
+                    <a href={% url "products:Group_category" 6  %} class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" height="300" src="{% static 'img/camera.jpg'%}" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Cameras</h5>
@@ -117,7 +117,7 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">  </p>
-                    <a href={% url "products:item_category" "Television"  %} class="cat-img position-relative overflow-hidden mb-3">
+                    <a href={% url "products:Group_category" 7  %} class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" width="300" src="{% static 'img/tv.jpg'%}" alt="">
                     </a>
                     <h5 class="font-weight-semi-bold m-0">Television</h5>
@@ -126,19 +126,19 @@
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">   </p>
-                    <a href={% url "products:item_category" "Printers"  %} class="cat-img position-relative overflow-hidden mb-3">
+                    <a href={% url "products:Group_category" 8  %} class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" width="300" src="{% static 'img/printer.jpg'%}" alt="">
                     </a>
-                    <h5 class="font-weight-semi-bold m-0">Printers</h5>
+                    <h5 class="font-weight-semi-bold m-0">Computer Peripherals</h5>
                 </div>
             </div>
             <div class="col-lg-4 col-md-6 pb-1">
                 <div class="cat-item d-flex flex-column border mb-4" style="padding: 30px;">
                     <p class="text-right">    </p>
-                    <a href={% url "products:item_category" "Headphones"  %} class="cat-img position-relative overflow-hidden mb-3">
+                    <a href={% url "products:Group_category" 9  %} class="cat-img position-relative overflow-hidden mb-3">
                         <img class="img-fluid" width="300" src="{% static 'img/headphone.jpg'%}" alt="">
                     </a>
-                    <h5 class="font-weight-semi-bold m-0">Headphones</h5>
+                    <h5 class="font-weight-semi-bold m-0">Audio</h5>
                 </div>
             </div>
         </div>
@@ -146,57 +146,35 @@
     <!-- Categories End -->
 
 
-    <!-- Subscribe Start -->
-    <div class="container-fluid bg-secondary my-5">
-        <div class="row justify-content-md-center py-5 px-xl-5">
-            <div class="col-md-6 col-12 py-5">
-                <div class="text-center mb-2 pb-2">
-                    <h2 class="section-title px-5 mb-3"><span class="bg-secondary px-2">Stay Updated</span></h2>
-                    <p>Amet lorem at rebum amet dolores. Elitr lorem dolor sed amet diam labore at justo ipsum eirmod duo labore labore.</p>
-                </div>
-                <form action="">
-                    <div class="input-group">
-                        <input type="text" class="form-control border-white p-4" placeholder="Email Goes Here">
-                        <div class="input-group-append">
-                            <button class="btn btn-primary px-4">Subscribe</button>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-    <!-- Subscribe End -->
-
 
     <!-- Products Start -->
-    <div class="container-fluid pt-5">
+    <div class="container-fluid py-5">
         <div class="text-center mb-4">
             <h2 class="section-title px-5"><span class="px-2">Just Arrived</span></h2>
         </div>
-        <div class="row px-xl-5 pb-3">
+        <div class="row px-xl-5">
+            <div class="col">
+                <div class="owl-carousel related-carousel">
 
-
-{% for item in latest%}
-
-            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
-                <div class="card product-item border-0 mb-4">
-                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
-                        <a href="{% url "products:item_detail" item.id %}">
-                        <img class="img-fluid w-100" src="/media/Item_image/{{item.image}}" alt=""></a>
-                    </div>
-                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
-                        <a href="{% url "products:item_detail" item.id %}">
-                        <h6 class="text-truncate mb-3">{{item.product_name}}</h6></a>
-                        <div class="d-flex justify-content-center">
-                            <h6>Rs.{{item.price}}</h6><h6 class="text-muted ml-2"><del>Rs.{{item.actual_price}}</del></h6>
+                    {% for item in latest %}
+                    <div class="card product-item border-0" style="height:20;">
+                        <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                            <a href="{% url "products:item_detail" item.id %}">
+                            <img class="img-fluid w-100" style="max-width: 350px;" src="/media/{{item.image}}" alt="">
+                        </a>
                         </div>
+                        <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                            <a href="{% url "products:item_detail" item.id %}">
+                            <h6 class="text-truncate mb-3">{{item.product_name}}</h6></a>
+                            <div class="d-flex justify-content-center">
+                                <h5>₹.{{item.price}} <small style='color:red;'>  <del>₹.{{item.actual_price}}<del></small></h5>
+                            </div>
+                        </div> 
                     </div>
+                    {% endfor%}
+                    
                 </div>
             </div>
-
-{% endfor%}
-
-
         </div>
     </div>
     <!-- Products End -->
