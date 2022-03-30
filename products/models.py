@@ -34,11 +34,11 @@ class Product(models.Model):
     model_name=models.CharField( max_length=100)
     qty=models.IntegerField(default=0)
     desc=models.TextField()
+    review_count=models.IntegerField(default=0)
+    rating_count=models.FloatField(default=0)
 
     def __str__(self):
         return self.product_name
-
-
 
 class Reviews(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)

@@ -1,4 +1,5 @@
 
+from itertools import product
 from django.shortcuts import render
 from methods import Details_context
 from .models import *
@@ -19,7 +20,7 @@ def all_reviews(request, id):
 
 
 def rating_(id):
-    if Reviews.objects.filter(product_id=id).count==0:
+    if Reviews.objects.filter(product_id=id).count()==0:
         rat_list=[0,0,0,0,0]
         return rat_list
     else:
@@ -33,8 +34,8 @@ def rating_(id):
             value=round(value,2)
             rat_list.append(value)
         rat_list.append(str(a/total)[:3])
-        return rat_list
 
+        return rat_list
 
 
 def detail(request, item_id):
@@ -53,10 +54,24 @@ def detail(request, item_id):
         rating=request.POST['RadioOptions']
         name=request.POST['name']
         email=request.POST['email']
-        print(massage,rating,name,email)
         review=Reviews.objects.create(review=massage, rating=rating, name=name,email=email,product_id=item_id)
         review.save()
+        add_rating_to_product(item_id)
     return render(request, "detail.html", context)
+
+
+def add_rating_to_product(id):
+    rev=Reviews.objects.filter(product_id=id).count()
+    a=0
+    for i in range(1,6):
+        rat=Reviews.objects.filter(product_id=id,rating=i).count()
+        a+=rat*i
+    rat=str(a/rev)[:3]
+
+    item=Product.objects.get(id=id)
+    item.review_count=rev
+    item.rating_count=rat
+    item.save()
 
 def shop(request):
     product=Product.objects.all()
@@ -81,6 +96,7 @@ def category(request,itemCategory ):
         'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id)),
         "path":f"Product: {Category_group.objects.get(sub_category=itemCategory).title}/ {Sub_category.objects.get(id=itemCategory).title}"
     }
+        
     return render(request, "shop.html",context)
 
 def Group_category(request,category_sub):
