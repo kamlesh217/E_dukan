@@ -1,0 +1,84 @@
+{% extends 'seller_base.html' %}
+{% load static %}
+{% block title%}Seller Dashboard{% endblock%}
+{% block body%} 
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 100px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Add new product</h1>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5" style="background-color: #EBEBEB;">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Enter Product detials</h4>
+                    {% if messages %}
+                    <ul class="messages">
+                    {% for message in messages %}
+                    <li  {% if message.tags %} class=" {{ message.tags }} " {% endif %}> {{ message }} </li>
+                    {% endfor %}
+                </ul>
+                {% endif %}
+                    <form method="post" action="">
+                    {% csrf_token %}
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Sub Category</label>
+                                <select class="form-control">
+                                    <option>Large select</option>
+                                  </select>
+                            </div>
+                        <div class="col-md-6 form-group">
+                            <label>Product Title</label>
+                            <input class="form-control" name="name" type="text" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Price</label>
+                            <input class="form-control" type="number" name="price" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Discount</label>
+                            <input class="form-control" type="number" name="discount" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Actual Price</label>
+                            <input class="form-control" type="number" name="a_price" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Brand Name</label>
+                            <input class="form-control" type="text" name="brand" required >
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Model Name</label>
+                            <input class="form-control" type="text" name="m_name" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Quantity</label>
+                            <input class="form-control" type="number" name="qty" required>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Description </label>
+                            <textarea row="5" col="200" class="form-control" spellcheck="true" name="desc"></textarea>
+                        </div>
+                        <div class="col-md-6 form-group">
+                            <label>Display Image</label>
+                            <input type="file" class="form-control-file" required>
+                        </div>
+                        <div class="col-md-12 form-group">
+                            <button type="submit" class="btn btn-primary">Submit Details</button>
+                        </form>
+                            
+                            <a href="/customer/login"> Already have account</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+    {% endblock%}

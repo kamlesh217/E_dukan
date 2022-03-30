@@ -41,3 +41,5 @@ def delete_product(request,item_id):
     item.delete()
     return redirect("/seller/dashboard")
 
+def add_item(request):
+    return render(request, "add_item.html")
