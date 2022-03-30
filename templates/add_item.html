@@ -9,13 +9,70 @@
         </div>
     </div>
     <!-- Page Header End -->
+    {% if group %}
+    <div class="container-fluid pt-5" style="background-color: #EBEBEB;">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <form method="post" action="">
+                        {% csrf_token %}
+                    <div class="col-md-6 form-group">
+                        <label>Select Category</label>
+                        <select name="category" class="form-control">
+                            {% for i in group %}
+                            <option value={{i.id}}>{{i.title}}</option>
+                            {% endfor%}
+                          </select>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-primary">Select</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif%}
+
+{% if sub_group %}
+    <div class="container-fluid pt-5" style="background-color: #EBEBEB;">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <label style="color:red;">{{path}}</label >
+                    <form method="post" action="">
+                        {% csrf_token %}
+                    <div class="col-md-6 form-group">
+                        <label>Select Sub Category</label>
+                        <select name="sub_category" class="form-control">
+                            {% for i in sub_group %}
+                            <option value={{i.id}}>{{i.title}}</option>
+                            {% endfor%}
+                          </select>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <button type="submit" class="btn btn-primary">Select</button>
+                    </div>
+                </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endif%}
 
 
+
+{% if product_path%}
     <!-- Checkout Start -->
     <div class="container-fluid pt-5" style="background-color: #EBEBEB;">
         <div class="row px-xl-5">
             <div class="col-lg-8">
                 <div class="mb-4">
+                    <label style="color:red;">{{product_path}}</label>
                     <h4 class="font-weight-semi-bold mb-4">Enter Product detials</h4>
                     {% if messages %}
                     <ul class="messages">
@@ -27,12 +84,6 @@
                     <form method="post" action="">
                     {% csrf_token %}
                         <div class="row">
-                            <div class="col-md-6 form-group">
-                                <label>Sub Category</label>
-                                <select class="form-control">
-                                    <option>Large select</option>
-                                  </select>
-                            </div>
                         <div class="col-md-6 form-group">
                             <label>Product Title</label>
                             <input class="form-control" name="name" type="text" required>
@@ -67,13 +118,12 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Display Image</label>
-                            <input type="file" class="form-control-file" required>
+                            <input type="file" name="image" class="form-control-file" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" class="btn btn-primary">Submit Details</button>
-                        </form>
-                            
-                            <a href="/customer/login"> Already have account</a>
+                        </form>   
+                           
                         </div>
                     </div>
                 </div>
@@ -81,4 +131,5 @@
         </div>
     </div>
     <!-- Checkout End -->
+    {% endif%}
     {% endblock%}

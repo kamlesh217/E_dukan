@@ -41,5 +41,39 @@ def delete_product(request,item_id):
     item.delete()
     return redirect("/seller/dashboard")
 
-def add_item(request):
-    return render(request, "add_item.html")
+def category_group(request):
+    group=Category_group.objects.all()
+    if request.method=="POST":
+        category=request.POST["category"]
+        return redirect(f"/seller/sub_category/{category}")
+    return render(request, "add_item.html",{"group":group})
+
+def category_sub(request,category):
+    sub_group=Sub_category.objects.filter(group_id=category)
+    if request.method=="POST":
+        sub=request.POST["sub_category"]
+        return redirect(f"/seller/add_item/{sub}")
+    context={
+        "sub_group":sub_group,
+        "path":f"Cateogry :{Category_group.objects.get(id=category).title}/"
+    }
+    return render(request, "add_item.html",context)
+
+def product_create(request,sub):
+    context={
+        "product_path":f"Cateogry :{Sub_category.objects.get(id=sub).group}/{Sub_category.objects.get(id=sub).title}/",
+    }
+    if request.method=="POST":
+        name=request.POST["name"]
+        price=request.POST["price"]
+        discount=request.POST["discount"]
+        a_price=request.POST["a_price"]
+        brand=request.POST["brand"]
+        m_name=request.POST["m_name"]
+        qty=request.POST["qty"]
+        desc=request.POST["desc"]
+        image=request.POST["image"]
+
+        print(name,price,discount,a_price,brand,m_name,qty,desc)
+
+    return render(request, "add_item.html",context)
