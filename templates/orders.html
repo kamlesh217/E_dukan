@@ -33,7 +33,7 @@
                       
                         {% for item in order_list%}
                         <tr>
-                            <td class="align-middle"> <img src="/media/{{item.productID.image}}" alt="" style="width: 50px;"></td>
+                            <td class="align-middle"> <img src="/media/Item_image/{{item.productID.image}}" alt="" style="width: 50px;"></td>
                             <td class="align-middle"> <a href="{% url "products:item_detail" item.productID.id %}"> {{item.productID.product_name}} </a></td>
                             <td class="align-middle">{{item.productID.price}}</td>
                             <td class="align-middle">

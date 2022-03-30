@@ -32,7 +32,7 @@
                         
                         {% for item in wishlist_items%}
                         <tr>
-                            <td class="align-middle"><img src="/media/{{item.product.image}}" alt="" style="width: 50px;">
+                            <td class="align-middle"><img src="/media/Item_image/{{item.product.image}}" alt="" style="width: 50px;">
                                 <a href="{% url "products:item_detail" item.product.id %}">{{item.product.product_name}}</a></td>
                             <td  class="align-middle">{{item.product.price}}</td>
                            

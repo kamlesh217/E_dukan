@@ -58,18 +58,7 @@ def detail(request, item_id):
         review.save()
     return render(request, "detail.html", context)
 
-def category(request,itemCategory ):
-    product_cat=Sub_category.objects.filter(group__title=itemCategory)
-    product_set=Product.objects.filter(category=product_cat[0])
-    for i in range(len(product_cat)):
-        a=Product.objects.filter(category=product_cat[i])
-        product_set= product_set | a
-    context={
-        "product":product_set,
-        'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
-        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
-    }
-    return render(request, "shop.html",context)
+
 
 def shop(request):
     product=Product.objects.all()
@@ -85,3 +74,11 @@ def shop(request):
 
 
 
+def category(request,itemCategory ):
+    product_set=Product.objects.filter(category__title=itemCategory)
+    context={
+        "product":product_set,
+        'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
+        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
+    }
+    return render(request, "shop.html",context)

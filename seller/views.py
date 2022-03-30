@@ -74,6 +74,9 @@ def product_create(request,sub):
         desc=request.POST["desc"]
         image=request.POST["image"]
 
-        print(name,price,discount,a_price,brand,m_name,qty,desc)
+        item=Product(category_id=sub,image=image,product_name=name,price=price,discount=discount,
+        qty=qty,desc=desc,actual_price=a_price,brand=brand,model_name=m_name)
+        item.seller_id=request.user.id
+        item.save()
 
     return render(request, "add_item.html",context)
