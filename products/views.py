@@ -58,8 +58,6 @@ def detail(request, item_id):
         review.save()
     return render(request, "detail.html", context)
 
-
-
 def shop(request):
     product=Product.objects.all()
     paginator=Paginator(product,1)
@@ -70,6 +68,7 @@ def shop(request):
     'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
     'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
     }
+    
     return render(request, "shop.html", context)
 
 
@@ -79,7 +78,8 @@ def category(request,itemCategory ):
     context={
         "product":product_set,
         'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
-        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
+        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id)),
+        "path":f"Product: {Category_group.objects.get(sub_category=itemCategory).title}/ {Sub_category.objects.get(id=itemCategory).title}"
     }
     return render(request, "shop.html",context)
 
@@ -88,6 +88,7 @@ def Group_category(request,category_sub):
     context={
         "product":product_set,
         'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
-        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id))
+        'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id)),
+        "path":f"Product: {Category_group.objects.get(id=category_sub).title}/ "
     }
     return render(request, "shop.html",context)
