@@ -1,15 +1,12 @@
-
 from django.db import models
 from seller.models import Seller
 # Create your models here
-
 
 class Category_group(models.Model):
     title=models.CharField( max_length=100)
 
     def __str__(self):
         return self.title
-
 
 class Sub_category(models.Model):
     title=models.CharField( max_length=100)
@@ -21,7 +18,6 @@ class Sub_category(models.Model):
     def get_group(self):
         return self.group.title
     
-
 class Product(models.Model):
     seller=models.ForeignKey(Seller, on_delete=models.CASCADE)
     category=models.ForeignKey(Sub_category, on_delete=models.CASCADE)
@@ -56,14 +52,12 @@ class Reviews(models.Model):
     def __str__(self):
         return self.product.product_name
 
-
 class Other_image(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     image=models.ImageField(upload_to="Item_image/")
 
     def __str__(self):
         return self.product.product_name
-
 
 class SSD(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -87,13 +81,12 @@ class ROM(models.Model):
         return self.product.product_name
 
 class Display_desc(models.Model):
-    product=models.ForeignKey(Product,on_delete=models.CASCADE)
+    product=models.OneToOneField(Product,on_delete=models.CASCADE)
     desc=models.TextField()
 
 
     def __str__(self):
         return self.product.product_name
-
 
 class Display_size(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -102,7 +95,6 @@ class Display_size(models.Model):
 
     def __str__(self):
         return self.product.product_name
-
 
 class Battery_power(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -124,7 +116,6 @@ class Camera_front(models.Model):
     def __str__(self):
         return self.product.product_name
 
-
 class Camera_rear(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     rear=models.CharField( max_length=50)
@@ -137,16 +128,12 @@ class Camera_desc(models.Model):
     def __str__(self):
         return self.product.product_name
 
-
-
 class OS(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     os=models.CharField( max_length=100)
 
     def __str__(self):
         return self.product.product_name
-
-
 
 class Connectivity_technologies(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -155,18 +142,12 @@ class Connectivity_technologies(models.Model):
     def __str__(self):
         return self.product.product_name
 
-
-
-
-
-
 class Special_features(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     desc=models.TextField()
 
     def __str__(self):
         return self.product.product_name
-
 
 class BOX(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
@@ -175,8 +156,6 @@ class BOX(models.Model):
     def __str__(self):
         return self.product.product_name
 
-
-
 class Manufacturer(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     desc=models.CharField( max_length=100)
@@ -184,15 +163,12 @@ class Manufacturer(models.Model):
     def __str__(self):
         return self.product.product_name
 
-
 class Country_of_origin(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     country=models.CharField( max_length=100)
 
     def __str__(self):
         return self.product.product_name
-
-
 
 class Item_weight(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)

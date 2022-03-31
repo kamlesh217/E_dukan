@@ -5,6 +5,7 @@ from methods import Details_context
 from .models import *
 from django.core.paginator import Paginator
 from cart.models import *
+from .forms import *
 # Create your views here.
 
 def all_reviews(request, id):
@@ -108,3 +109,15 @@ def Group_category(request,category_sub):
         "path":f"Product: {Category_group.objects.get(id=category_sub).title}/ "
     }
     return render(request, "shop.html",context)
+
+
+def add_feature(request):
+    if request.method=='POST':
+        form=Display_desc_form(request.POST)
+        if form.is_valid():
+            form.save()
+    context={
+        "form":Display_desc_form
+    }
+    return render(request, "seller_form.html",context)
+    
