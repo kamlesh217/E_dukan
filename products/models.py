@@ -84,14 +84,12 @@ class Display_desc(models.Model):
     product=models.OneToOneField(Product,on_delete=models.CASCADE)
     desc=models.TextField()
 
-
     def __str__(self):
         return self.product.product_name
 
 class Display_size(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     size=models.CharField(max_length=200)
-
 
     def __str__(self):
         return self.product.product_name
@@ -125,6 +123,7 @@ class Camera_rear(models.Model):
 class Camera_desc(models.Model):
     product=models.ForeignKey(Product,on_delete=models.CASCADE)
     desc=models.TextField()
+    
     def __str__(self):
         return self.product.product_name
 
