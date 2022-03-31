@@ -1,6 +1,7 @@
 from multiprocessing import context
 from django.shortcuts import render,redirect
 from customer.models import *
+from methods import Details_context
 from seller.models import *
 from products.models import *
 
@@ -71,7 +72,7 @@ def category_group(request):
             if request.method=="POST":
                 category=request.POST["category"]
                 return redirect(f"/seller/sub_category/{category}")
-            return render(request, "add_item.html",{"group":group})
+            return render(request, "seller_add_item.html",{"group":group})
         else:
             return redirect("/seller/")
     else:
@@ -90,7 +91,7 @@ def category_sub(request,category):
                 "sub_group":sub_group,
                 "path":f"Cateogry :{Category_group.objects.get(id=category).title}/"
             }
-            return render(request, "add_item.html",context)
+            return render(request, "seller_add_item.html",context)
         else:
             return redirect("/seller/")
     else:
@@ -100,7 +101,7 @@ def product_create(request,sub):
     if  request.user.is_authenticated:
         if Seller.objects.filter(seller=request.user.id):
             context={
-            "product_path":f"Cateogry :{Sub_category.objects.get(id=sub).group}/{Sub_category.objects.get(id=sub).title}/",
+            "product_create_path":f"Cateogry :{Sub_category.objects.get(id=sub).group}/{Sub_category.objects.get(id=sub).title}/",
             }
             if request.method=="POST":
                 name=request.POST["name"]
@@ -117,9 +118,28 @@ def product_create(request,sub):
                 qty=qty,desc=desc,actual_price=a_price,brand=brand,model_name=m_name)
                 item.seller_id=request.user.id
                 item.save()
+                print(item.id)
+                return redirect(f"/seller/add_feature/{item.id}")
 
-            return render(request, "add_item.html",context)
+            return render(request, "seller_add_item.html",context)
         else:
             return redirect("/seller/")
     else:
         return redirect("/customer/login")
+
+def add_feature(request,item_id):
+    if  request.user.is_authenticated:
+        if Seller.objects.filter(seller=request.user.id):
+            sub=Product.objects.get(id=item_id).category.id
+            context=Details_context(item_id)
+            
+            context["product_feature_path"]=f"Cateogry :{Sub_category.objects.get(id=sub).group}/{Sub_category.objects.get(id=sub).title}/\
+                {Product.objects.get(id=item_id).product_name}",
+
+        
+            return render(request, "seller_add_item.html",context)
+        else:
+            return redirect("/seller/")
+    else:
+        return redirect("/customer/login")
+

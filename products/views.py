@@ -76,9 +76,6 @@ def add_rating_to_product(id):
 
 def shop(request):
     product=Product.objects.all()
-    paginator=Paginator(product,1)
-    page=request.GET.get('page')
-    product=paginator.get_page(page)
     context={
     "product":product,
     'cart_item':len(Cart.objects.filter(customer_id=request.user.id)),
@@ -86,7 +83,6 @@ def shop(request):
     }
     
     return render(request, "shop.html", context)
-
 
 
 def category(request,itemCategory ):
