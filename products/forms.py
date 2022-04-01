@@ -4,7 +4,7 @@ from .models import *
 class SSD_form(forms.ModelForm):
     class Meta:
         model = SSD
-        fields = ("ssd",)
+        fields = ("ssd","product")
     
 class RAM_form(forms.ModelForm):
     class Meta:

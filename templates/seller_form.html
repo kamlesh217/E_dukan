@@ -1,12 +1,15 @@
 {% extends 'seller_base.html' %}
 {% load static %}
-{% block title%}Seller Dashboard{% endblock%}
+{% block title%}{% endblock%}
 {% block body%} 
+<div class="container">
 <form method="post" action="">
     {% csrf_token %}
-{{form}}
+{{forms}}
+<br>
 <button type="submit">submit</button>
 </form>
+</div>
 {% endblock %}
 
 

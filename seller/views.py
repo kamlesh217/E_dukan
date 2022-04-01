@@ -2,6 +2,7 @@ from multiprocessing import context
 from django.shortcuts import render,redirect
 from customer.models import *
 from methods import Details_context
+from products.forms import BOX_form, Battery_desc_form, Battery_power_form, Camera_desc_form, Camera_front_form, Camera_rear_form, Connectivity_technologies_form, Country_of_origin_form, Display_desc_form, Display_size_form, Item_weight_form, Manufacturer_form, OS_form, Other_image_form, RAM_form, ROM_form, SSD_form, Special_features_form
 from seller.models import *
 from products.models import *
 
@@ -116,9 +117,8 @@ def product_create(request,sub):
 
                 item=Product(category_id=sub,image=image,product_name=name,price=price,discount=discount,
                 qty=qty,desc=desc,actual_price=a_price,brand=brand,model_name=m_name)
-                item.seller_id=request.user.id
+                item.seller=Seller.objects.get(seller=request.user.id)
                 item.save()
-                print(item.id)
                 return redirect(f"/seller/add_feature/{item.id}")
 
             return render(request, "seller_add_item.html",context)
@@ -134,12 +134,120 @@ def add_feature(request,item_id):
             context=Details_context(item_id)
             
             context["product_feature_path"]=f"Cateogry :{Sub_category.objects.get(id=sub).group}/{Sub_category.objects.get(id=sub).title}/\
-                {Product.objects.get(id=item_id).product_name}",
+                {Product.objects.get(id=item_id).product_name}"
+            
+            if request.method=="POST":
+                name=request.POST["feature"]
+                return redirect(f"/seller/add_item_feature/{name}/{item_id}")
 
-        
             return render(request, "seller_add_item.html",context)
         else:
             return redirect("/seller/")
     else:
         return redirect("/customer/login")
+
+def Create_item_feature(request,name,item_id):
+    form=""
+    if name=="SSD":
+        if request.method == "POST":  
+            form=SSD_form(request.POST)
+    
+    elif name=="ROM":
+        if request.method == "POST": 
+            form=ROM_form()
+        else:
+
+    
+    elif name=="RAM":
+        if request.method == "POST": 
+            form=RAM_form()
+        else:
+            form=RAM_form()
+    
+    elif name=="OS":
+        if request.method == "POST": 
+            form=OS_form()
+        else:
+            form=OS_form()
+    
+    elif name=="Special_features":
+        if request.method == "POST": 
+            form=Special_features_form()
+        else:
+            form=Special_features_form()
+    
+    elif name=="Display_desc":
+        if request.method == "POST": 
+            form=Display_desc_form()
+        else:
+            form=Display_desc_form()
+
+    
+    elif name=="Display_size":
+        if request.method == "POST": 
+            form=Display_size_form()
+        else:
+            form=Display_size_form()
+    
+    elif name=="Battery_power":
+        if request.method == "POST": 
+            form=Battery_power_form()
+        else:
+    
+    elif name=="Battery_desc":
+        if request.method == "POST": 
+            form=Battery_desc_form()
+        else:
+    
+    elif name=="Camera_front":
+        if request.method == "POST": 
+            form=Camera_front_form()
+        else:
+    
+    elif name=="Camera_rear":
+        if request.method == "POST": 
+            form=Camera_rear_form()
+        else:
+    
+    elif name=="Camera_desc":
+        if request.method == "POST": 
+            form=Camera_desc_form()
+        else:
+    
+    elif name=="Connectivity_technologies":
+        if request.method == "POST": 
+            form=Connectivity_technologies_form()
+        else:
+    
+    elif name=="BOX":
+        if request.method == "POST": 
+            form=BOX_form()
+        else:
+    
+    elif name=="Manufacturer":
+        if request.method == "POST": 
+            form=Manufacturer_form()
+        else:
+    
+    elif name=="Country_of_origin":
+        if request.method == "POST": 
+         form=Country_of_origin_form()
+        else:
+    
+    elif name=="Item_weight":
+        if request.method == "POST": 
+            form=Item_weight_form()
+        else:
+    
+    elif name=="Other_image":
+        if request.method == "POST": 
+            form=Other_image_form()
+        else:
+    
+    if form.is_valid:
+        form.save()
+        return redirect(f"/seller/add_item_feature/{name}/{item_id}")
+
+
+    return render(request, "seller_form.html", {"forms":form})
 

@@ -118,7 +118,7 @@
                         </div>
                         <div class="col-md-6 form-group">
                             <label>Display Image</label>
-                            <input type="file" name="image" class="form-control-file" required>
+                            <input type="image" name="image" class="form-control-file" required>
                         </div>
                         <div class="col-md-12 form-group">
                             <button type="submit" class="btn btn-primary">Submit Details</button>
@@ -134,43 +134,11 @@
     {% endif%}
 
     {% if product_feature_path%}
-    <div class="container">
-    <div class="container-fluid pt-5" style="background-color: #EBEBEB;">
-        <div class="row px-xl-5">
-            <div class="col-lg-8">
-                <div class="mb-4">
-                    <label style="color:red;">{{product_feature_path}}</label >
-                    <form method="post" action="">
-                        {% csrf_token %}
-                    <div class="col-md-6 form-group">
-                        <label>Select Feature</label>
-                        <select name="sub_category" class="form-control">
-                            {% for i in sub_group %}
-                            <option >ffds</option>
-                            {% endfor%}
-                          </select>
-                    </div>
-                    <div class="col-md-12 form-group">
-                        <button type="submit" class="btn btn-primary">Select</button>
-                    </div>
-                </form>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-</div>
-<br>
-
-
-
+    
     <div class ="container">
-                                    
+        <label style="color:red;">{{product_feature_path}}</label >
         <table class="table">
             <tbody>
-
         {% if os %}
               <tr>
                 <td class="table-active" width="275px">OS<td>
@@ -281,16 +249,52 @@
           </table>
 
         </div>
-
-
-
-
-
-
-
-
-    
+        <br>
+        <div class="container">
+            <div class="container-fluid pt-5" style="background-color: #EBEBEB;">
+                <div class="row px-xl-5">
+                    <div class="col-lg-8">
+                        <div class="mb-4">
+                            <form method="post" action="">
+                                {% csrf_token %}
+                            <div class="col-md-6 form-group">
+                                <label>Select Feature</label>
+                                <select name="feature" class="form-control">
+                                    <option value="Other_image">Other image</option>
+                                    <option value="SSD">SSD</option>
+                                    <option value="RAM">RAM</option>
+                                    <option value="ROM">ROM</option>
+                                    <option value="Display_desc">Display description</option>
+                                    <option value="Display_size">Display size</option>
+                                    <option value="Battery_power">Battery power</option>
+                                    <option value="Battery_desc">Battery description</option>
+                                    <option value="Camera_front">Camera front</option>
+                                    <option value="Camera_rear">Camera rear</option>
+                                    <option value="Camera_desc">Camera description</option>
+                                    <option value="OS">OS description</option>
+                                    <option value="Connectivity_technologies">Connectivity technologies</option>
+                                    <option value="Special_features">Special features</option>
+                                    <option value="BOX">BOX</option>
+                                    <option value="Manufacturer">Manufacturer</option>
+                                    <option value="Country_of_origin">Country of origin</option>
+                                    <option value="Item_weight">Item weight</option>
+                                  </select>
+                            </div>
+                            <div class="col-md-12 form-group">
+                                <button type="submit" class="btn btn-primary">Select</button>
+                            </div>
+                        </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        
+        
+        </div>
 
     {% endif%}
+
+
+
 
     {% endblock%}
