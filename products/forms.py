@@ -9,12 +9,12 @@ class SSD_form(forms.ModelForm):
 class RAM_form(forms.ModelForm):
     class Meta:
         model = RAM
-        fields = ("ram",)
+        fields = ("ram","product")
 
 class ROM_form(forms.ModelForm):
     class Meta:
         model = ROM
-        fields = ("rom",)
+        fields = ("rom","product")
 
 class Display_desc_form(forms.ModelForm):
     class Meta:
@@ -24,27 +24,27 @@ class Display_desc_form(forms.ModelForm):
 class Display_size_form(forms.ModelForm):
     class Meta:
         model = Display_size
-        fields = ("size",)
+        fields = ("size","product")
 
 class Battery_power_form(forms.ModelForm):
     class Meta:
         model = Battery_power
-        fields = ("power",)
+        fields = ("power","product")
 
 class Battery_desc_form(forms.ModelForm):
     class Meta:
         model = Battery_desc
-        fields = ("desc",)
+        fields = ("desc","product")
 
 class Camera_front_form(forms.ModelForm):
     class Meta:
         model = Camera_front
-        fields = ("front",)
+        fields = ("front","product")
 
 class Camera_rear_form(forms.ModelForm):
     class Meta:
         model = Camera_rear
-        fields = ("rear",)
+        fields = ("rear","product")
 
 class Camera_desc_form(forms.ModelForm):
     class Meta:

@@ -107,13 +107,4 @@ def Group_category(request,category_sub):
     return render(request, "shop.html",context)
 
 
-def add_feature(request):
-    if request.method=='POST':
-        form=Display_desc_form(request.POST)
-        if form.is_valid():
-            form.save()
-    context={
-        "form":Display_desc_form
-    }
-    return render(request, "seller_form.html",context)
     

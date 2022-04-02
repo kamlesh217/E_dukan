@@ -1,5 +1,4 @@
 from django.db import models
-from seller.models import Seller
 # Create your models here
 
 class Category_group(models.Model):
@@ -19,7 +18,6 @@ class Sub_category(models.Model):
         return self.group.title
     
 class Product(models.Model):
-    seller=models.ForeignKey(Seller, on_delete=models.CASCADE)
     category=models.ForeignKey(Sub_category, on_delete=models.CASCADE)
     product_name=models.CharField(max_length=100)
     image=models.ImageField(upload_to="Item_image/")

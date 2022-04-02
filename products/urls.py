@@ -8,7 +8,6 @@ urlpatterns = [
     path('<int:id>/reviews', views.all_reviews , name="all_reviews" ),
     path('shop/', views.shop, name="shop" ),
     path("category/<int:itemCategory>/",views.category, name="item_category"),
-     path("group/<int:category_sub>/",views.Group_category, name="Group_category"),
-     path('update/', views.add_feature, name="add_feature" ),
+    path("group/<int:category_sub>/",views.Group_category, name="Group_category"),
     
 ]
