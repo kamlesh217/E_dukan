@@ -93,7 +93,17 @@ def category(request,itemCategory ):
         'wishlist_item':len(Wishlist.objects.filter(customer_id=request.user.id)),
         "path":f"Product: {Category_group.objects.get(sub_category=itemCategory).title}/ {Sub_category.objects.get(id=itemCategory).title}"
     }
-        
+    if request.GET:
+        filter_type=request.GET['filter_by']
+        if filter_type=="low_to_high":
+            product_set=Product.objects.filter(category__id=itemCategory).order_by('price')
+        elif filter_type=="high_to_low":
+            product_set=Product.objects.filter(category__id=itemCategory).order_by('-price')
+        elif filter_type=="rating":
+            product_set=Product.objects.filter(category__id=itemCategory).order_by('-rating_count')
+        else:
+            product_set=Product.objects.filter(category__id=itemCategory)
+        context["product"]=product_set
     return render(request, "shop.html",context)
 
 def Group_category(request,category_sub):
