@@ -1,4 +1,5 @@
 
+from django.shortcuts import redirect, render
 from itertools import product
 from django.shortcuts import render
 from methods import Details_context
@@ -57,10 +58,16 @@ def detail(request, item_id):
         email=request.POST['email']
         review=Reviews.objects.create(review=massage, rating=rating, name=name,email=email,product_id=item_id)
         review.save()
-        add_rating_to_product(item_id)
+        add_rating_to_product(item_id)        
     return render(request, "detail.html", context)
 
-
+def helpfull(request,review_id):
+    review=Reviews.objects.get(id=review_id)
+    review.helpfull+=1
+    review.save()
+    product_id=Reviews.object.get(id=review_id)
+    redirect(f"/products/{product_id.product__id}")
+        
 def add_rating_to_product(id):
     rev=Reviews.objects.filter(product_id=id).count()
     a=0
@@ -94,16 +101,17 @@ def category(request,itemCategory ):
         "path":f"Product: {Category_group.objects.get(sub_category=itemCategory).title}/ {Sub_category.objects.get(id=itemCategory).title}"
     }
     if request.GET:
-        filter_type=request.GET['filter_by']
-        if filter_type=="low_to_high":
-            product_set=Product.objects.filter(category__id=itemCategory).order_by('price')
-        elif filter_type=="high_to_low":
-            product_set=Product.objects.filter(category__id=itemCategory).order_by('-price')
-        elif filter_type=="rating":
-            product_set=Product.objects.filter(category__id=itemCategory).order_by('-rating_count')
-        else:
-            product_set=Product.objects.filter(category__id=itemCategory)
-        context["product"]=product_set
+        if request.GET['filter_by']:
+            filter_type=request.GET['filter_by']
+            if filter_type=="low_to_high":
+                product_set=Product.objects.filter(category__id=itemCategory).order_by('price')
+            elif filter_type=="high_to_low":
+                product_set=Product.objects.filter(category__id=itemCategory).order_by('-price')
+            elif filter_type=="rating":
+                product_set=Product.objects.filter(category__id=itemCategory).order_by('-rating_count')
+            else:
+                product_set=Product.objects.filter(category__id=itemCategory)
+            context["product"]=product_set
     return render(request, "shop.html",context)
 
 def Group_category(request,category_sub):

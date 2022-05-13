@@ -43,6 +43,7 @@ class Reviews(models.Model):
     comment=models.CharField( max_length=200)
     date=models.DateField( auto_now_add=True)
     time=models.TimeField( auto_now_add=True)
+    helpfull=models.IntegerField(default=0)
 
     class Meta:
         ordering=['time']

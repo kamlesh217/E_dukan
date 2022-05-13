@@ -150,8 +150,9 @@
                                             
                                             <h6><small> Reviewed on {{i.date}}</small></h6>
                                             <p>{{i.review}}</p>
-                                            <h6><small>30 people found this helpful</small></h6>
-                                            <button type="button" class="btn btn-outline-dark btn-sm">Helpful</button>
+                                            <h6><small>{{i.helpfull}} people found this helpful</small></h6>
+                                            <a href="/products/1/reviews/?helpfull={{i.id}}">
+                                            <button type="button" class="btn btn-outline-dark btn-sm">Helpful</button></a>
                                             <hr>
 
                                   
